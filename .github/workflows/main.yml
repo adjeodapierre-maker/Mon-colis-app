@@ -22,8 +22,17 @@ jobs:
       - name: Installer les dépendances
         run: flutter pub get
 
+      - name: Générer la structure Android
+        run: flutter create --platforms=android .
+
       - name: Construire l'application Android
         run: flutter build apk --release
+
+      - name: Télécharger l'APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: mon-colis-app
+          path: build/app/outputs/flutter-apk/app-release.apk
 
       - name: Télécharger l'APK
         uses: actions/upload-artifact@v4
