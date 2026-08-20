@@ -34,8 +34,8 @@ jobs:
           name: mon-colis-apk
           path: build/app/outputs/flutter-apk/app-release.apk
 
-      - name: Télécharger l'APK
-        uses: actions/upload-artifact@v4
-        with:
-           name: mon-colis-apk
-          path: build/app/outputs/flutter-apk/app-release.apk
+- name: Télécharger l'APK
+  uses: actions/upload-artifact@v4
+  with:
+    name: mon-colis-app
+    path: build/app/outputs/flutter-apk/app-release.apk
