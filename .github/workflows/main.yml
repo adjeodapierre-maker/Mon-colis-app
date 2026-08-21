@@ -19,24 +19,38 @@ jobs:
         with:
           channel: stable
 
-      - name: Vérifier le projet Flutter
+      - name: Vérifier la structure du projet
         run: |
-          echo "Vérification de la structure du projet"
+          echo "=== Structure du projet ==="
           ls -la
-          echo "Contenu de lib :"
+          echo ""
+          echo "=== Contenu de lib ==="
           ls -la lib
+          echo ""
+
+      - name: Rechercher les URLs Supabase
+        run: |
+          echo "=== Recherche de l'URL INCORRECTE ==="
+          grep -R "yljxmdxjihlvdlsxlagu" . --exclude-dir=.git --exclude="*.zip" || true
+
+          echo ""
+          echo "=== Recherche de l'URL CORRECTE ==="
+          grep -R "yljxmdxjihvldslxlagu" . --exclude-dir=.git --exclude="*.zip" || true
 
       - name: Installer les dépendances
         run: flutter pub get
 
-      - name: Générer la structure Android
-        run: flutter create --platforms=android .
+      - name: Vérifier le projet Flutter
+        run: flutter analyze
 
       - name: Construire l'application Android
         run: flutter build apk --release
 
       - name: Vérifier que l'APK existe
-        run: ls -lh build/app/outputs/flutter-apk/
+        run: |
+          echo "=== APK généré ==="
+          ls -lh build/app/outputs/flutter-apk/
+          file build/app/outputs/flutter-apk/app-release.apk
 
       - name: Télécharger l'APK
         uses: actions/upload-artifact@v4
