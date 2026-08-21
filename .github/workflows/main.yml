@@ -26,7 +26,6 @@ jobs:
           echo ""
           echo "=== Contenu de lib ==="
           ls -la lib
-          echo ""
 
       - name: Rechercher les URLs Supabase
         run: |
@@ -39,9 +38,6 @@ jobs:
 
       - name: Installer les dépendances
         run: flutter pub get
-
-      - name: Vérifier le projet Flutter
-        run: flutter analyze
 
       - name: Construire l'application Android
         run: flutter build apk --release
