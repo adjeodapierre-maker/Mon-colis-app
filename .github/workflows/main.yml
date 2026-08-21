@@ -1,5 +1,4 @@
 name: Build MON Colis Android
-name: Build MON Colis Android
 
 on:
   push:
