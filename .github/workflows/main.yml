@@ -20,4 +20,26 @@ jobs:
           channel: stable
 
       - name: Vérifier le projet Flutter
-        run: echo "Vérification de la structure du projet"
+        run: |
+          echo "Vérification de la structure du projet"
+          ls -la
+          echo "Contenu de lib :"
+          ls -la lib
+
+      - name: Installer les dépendances
+        run: flutter pub get
+
+      - name: Générer la structure Android
+        run: flutter create --platforms=android .
+
+      - name: Construire l'application Android
+        run: flutter build apk --release
+
+      - name: Vérifier que l'APK existe
+        run: ls -lh build/app/outputs/flutter-apk/
+
+      - name: Télécharger l'APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: mon-colis-apk
+          path: build/app/outputs/flutter-apk/app-release.apk
