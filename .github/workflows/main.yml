@@ -1,4 +1,5 @@
 name: Build MON Colis Android
+name: Build MON Colis Android
 
 on:
   push:
@@ -21,7 +22,7 @@ jobs:
 
       - name: Vérifier la structure du projet
         run: |
-          echo "=== Structure du projet ==="
+          echo "=== Structure initiale ==="
           ls -la
           echo ""
           echo "=== Contenu de lib ==="
@@ -38,6 +39,9 @@ jobs:
 
       - name: Installer les dépendances
         run: flutter pub get
+
+      - name: Générer la structure Android
+        run: flutter create --platforms=android .
 
       - name: Construire l'application Android
         run: flutter build apk --release
